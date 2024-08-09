@@ -17,7 +17,7 @@ export const getUser = async (username: string) => {
 };
 
 export const getAllRepos = async ({ username, page = 1, prevData, isOnlyRecent = false }: { username: string, page: number, prevData: { [key: string]: string }[], isOnlyRecent?: boolean }): Promise<{ [key: string]: string; }[]> => {
-  const reposPerPage = isOnlyRecent ? 6 : 30;
+  const reposPerPage = isOnlyRecent ? 10 : 30;
   let data = prevData ? prevData : [];
 
   const repos = await octokit.request(`GET /users/${username}/repos?per_page=${reposPerPage}&page=${page}&sort=updated`);
