@@ -16,23 +16,23 @@ export const getUser = async (username: string) => {
   return user?.data;
 };
 
-export const getAllRepos = async (username: string, page: number = 1, prevData: { [key: string]: string }[]): Promise<{ [key: string]: string; }[]> => {
-  const reposPerPage = 30;
+export const getAllRepos = async ({ username, page = 1, prevData, isOnlyRecent = false }: { username: string, page: number, prevData: { [key: string]: string }[], isOnlyRecent?: boolean }): Promise<{ [key: string]: string; }[]> => {
+  const reposPerPage = isOnlyRecent ? 6 : 30;
   let data = prevData ? prevData : [];
 
-  const repos = await octokit.request(`GET /users/${username}/repos?per_page=${reposPerPage}&page=${page}`);
+  const repos = await octokit.request(`GET /users/${username}/repos?per_page=${reposPerPage}&page=${page}&sort=updated`);
 
   data = data.concat(repos.data);
 
-  if (repos?.data.length == reposPerPage) {
-    return getAllRepos(username, page + 1, data);
+  if (repos?.data.length == reposPerPage && !isOnlyRecent) {
+    return getAllRepos({ username, page: page + 1, prevData: data });
   }
 
   return data;
 };
 
 export const getAllReposLang = async (username: string) => {
-  const repos = await getAllRepos(username, 1, []);
+  const repos = await getAllRepos({ username, page: 1, prevData: [] });
   const langs: { [key: string]: number } = {};
 
   for (let i = 0; i < repos.length; i++) {

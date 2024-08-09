@@ -1,4 +1,4 @@
-import ResumePage from "../components/ResumePage"
+import ResumePage from "../components/resume/ResumePage"
 
 const Resume = () => {
   return (
