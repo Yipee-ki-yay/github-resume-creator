@@ -13,6 +13,14 @@ const HomePage = () => {
   return (
     <>
       <h1 className="text-3xl font-bold">Github Résumé Generator</h1>
+      <p>
+        The GitHub-Based Resume Generator is a powerful tool designed to create
+        a professional resume by analyzing a user's GitHub profile. Simply input
+        your GitHub username, and the program will automatically generate a
+        detailed resume highlighting your technical skills, projects,
+        contributions, and work experience based on your public repositories and
+        activity.
+      </p>
       <form onSubmit={handleSubmit} className="max-w-7xl pt-12">
         <label htmlFor="text" className="text-1xl">
           Enter your GitHub username and click on generate
@@ -27,16 +35,13 @@ const HomePage = () => {
             required
             onChange={(e) => setText(e.target.value)}
           />
-          <button
-            className="btn btn-primary join-item"
-            type="submit"
-          >
+          <button className="btn btn-primary join-item" type="submit">
             Generate
           </button>
         </div>
       </form>
     </>
   );
-}
+};
 
-export default HomePage
+export default HomePage;
