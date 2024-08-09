@@ -14,4 +14,4 @@ Resume page contains info about the github user and his repositories. Main infor
 ## Getting Started
 
 Run the project in the development mode ```npm run dev```.
-The project uses the github token which one is stored in the .env as the variable for github api.
+The project uses the github token which one is stored in the .env as the variable VITE_GITHUB_TOKEN for github api.
